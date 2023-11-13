@@ -18,7 +18,7 @@ int main(void) {
         }
         fclose(f);
         printf("t = %d, %d filmes\n", t, TARVB_conta_filmes(a));
-        TARVB_libera(a);
+        //TARVB_libera(a);
     }
     return 0;
 }

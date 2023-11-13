@@ -65,6 +65,7 @@ TARVB *TARVB_divide_raiz(TARVB *a, int t) {
     // cria novo filho direito
     TARVB *novo_filho = TARVB_cria(t);
     novo_filho->folha = a->folha; // se a antiga raiz era folha, o novo_filho também será
+    novo_filho->nch = t - 1;
 
     // copia chave central para nova raiz
     nova_raiz->chave[0] = a->chave[t - 1];

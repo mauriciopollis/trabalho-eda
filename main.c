@@ -6,7 +6,7 @@
 int main(void) {
 
     // cria a árvore b
-    int t = 3;
+    int t = 2;
     TARVB *a = TARVB_cria(t);
 
     // lê o arquivo e vai preenchendo a árvore
@@ -14,7 +14,7 @@ int main(void) {
     char titulo[82], diretor[52], genero[32];
     int ano, duracao;
     while(!feof(f)) {
-        int r = fscanf(f, "%82[^/]/%d/%52[^/]/%32[^/]/%d", titulo, &ano, diretor, genero, &duracao);
+        int r = fscanf(f, "%82[^/]/%d/%52[^/]/%32[^/]/%d\n", titulo, &ano, diretor, genero, &duracao);
         if(r == 5) { // leu os 5 campos
             a = TARVB_insere_filme(a, titulo, ano, diretor, genero, duracao, t);            
         }
