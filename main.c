@@ -35,9 +35,11 @@ int main(void) {
 
     //printf("%d\n", TARVB_conta_nos(a));
 
-    printf("%d\n", TARVB_conta_filmes(a));
+    //printf("%d\n", TARVB_conta_filmes(a));
 
-    //TARVB_libera(a);
+    TARVB_imprime_crescente(a);
+
+    TARVB_libera(a);
 
     return 0;
 }

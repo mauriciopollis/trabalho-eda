@@ -253,19 +253,12 @@ int TARVB_conta_filmes(TARVB *a) {
 
 void TARVB_libera(TARVB *a) {
     if(a != NULL) {
-        if(a->folha) {
-            for(int i=0; i<a->nch; i++) {
-                free(a->chave[i]);
-            }
-            free(a);
-        } else {
-            for(int i=0; i<=a->nch; i++) {
-                for(int i=0; i<a->nch; i++) {
-                    free(a->chave[i]);
-                }   
-                TARVB_libera(a->filho[i]);
-            }
-            free(a);
+        for(int i=0; i<=a->nch; i++) {
+            TARVB_libera(a->filho[i]);
         }
+        for(int i=0; i<a->nch; i++) {
+            TFILME_libera(a->chave[i]);
+        }
+        free(a);
     }
 }

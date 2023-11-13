@@ -14,7 +14,12 @@ TFILME *TFILME_cria(char *titulo, int ano, char *diretor, char *genero, int dura
     return novo_filme;
 }
 
-void TFILME_libera(TFILME *filme);
+void TFILME_libera(TFILME *filme) {
+    free(filme->titulo);
+    free(filme->diretor);
+    free(filme->genero);
+    free(filme);
+}
 
 void TFILME_imprime(TFILME *filme) {
     printf("%s, %d, %s, %s, %d\n", filme->titulo, filme->ano, filme->diretor, filme->genero, filme->duracao);
