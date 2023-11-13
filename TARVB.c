@@ -126,7 +126,10 @@ TARVB *TARVB_insere_filme_aux(TARVB *a, TFILME *filme, int t) {
         if(a->filho[i]->nch == (2*t-1)) {
             // filho cheio, fazer separação do filho[i]
             a = TARVB_divide(a, i, a->filho[i], t);
+            // a divisão do nó pode fazer com que o valor de i esteja incorreto
+            if(TFILME_compara_filmes(filme, a->chave[i]) > 0) i++;
         }
+
         // inserir filme no filho[i]
         a->filho[i] = TARVB_insere_filme_aux(a->filho[i], filme, t);
 
@@ -183,9 +186,12 @@ void TARVB_imprime_crescente(TARVB *a) {
             TFILME_imprime(a->chave[i]);
         }
     } else {
-        for(int i=0; i<=a->nch; i++) {
+        int i;
+        for(i=0; i<a->nch; i++) {
             TARVB_imprime_crescente(a->filho[i]);
+            TFILME_imprime(a->chave[i]);
         }
+        TARVB_imprime_crescente(a->filho[i]);
     }
 }
 

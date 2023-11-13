@@ -15,9 +15,6 @@ TFILME *TFILME_cria(char *titulo, int ano, char *diretor, char *genero, int dura
 }
 
 void TFILME_libera(TFILME *filme) {
-    free(filme->titulo);
-    free(filme->diretor);
-    free(filme->genero);
     free(filme);
 }
 

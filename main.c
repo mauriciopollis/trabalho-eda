@@ -6,7 +6,7 @@
 int main(void) {
 
     // cria a árvore b
-    int t = 2;
+    int t = 33;
     TARVB *a = TARVB_cria(t);
 
     // lê o arquivo e vai preenchendo a árvore
@@ -23,7 +23,7 @@ int main(void) {
     
     fclose(f);
 
-    //TARVB_imprime_crescente(a);
+    TARVB_imprime_crescente(a);
 
     //TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
 
@@ -37,9 +37,9 @@ int main(void) {
 
     //printf("%d\n", TARVB_conta_filmes(a));
 
-    TARVB_imprime_crescente(a);
+    //TARVB_imprime_crescente(a);
 
-    TARVB_libera(a);
+    //TARVB_libera(a);
 
     return 0;
 }
