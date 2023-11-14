@@ -262,9 +262,11 @@ void TARVB_libera(TARVB *a) {
         for(int i=0; i<=a->nch; i++) {
             TARVB_libera(a->filho[i]);
         }
+        free(a->filho);
         for(int i=0; i<a->nch; i++) {
             TFILME_libera(a->chave[i]);
         }
+        free(a->chave);
         free(a);
     }
 }
