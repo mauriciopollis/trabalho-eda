@@ -200,10 +200,10 @@ void TARVB_busca_info_subordinada(TARVB *a, char *titulo, int ano) {
     if(busca != NULL) {
         int i = 0;
         for(i = 0; i<busca->nch; i++) {
-            if(TFILME_compara_titulo_ano(titulo, ano, a->chave[i]->titulo, a->chave[i]->ano) == 0) {
-                printf("Diretor: %s\n", a->chave[i]->diretor);
-                printf("Gênero: %s\n", a->chave[i]->genero);
-                printf("Diretor: %d\n", a->chave[i]->duracao);
+            if(TFILME_compara_titulo_ano(titulo, ano, busca->chave[i]->titulo, busca->chave[i]->ano) == 0) {
+                printf("Diretor: %s\n", busca->chave[i]->diretor);
+                printf("Gênero: %s\n", busca->chave[i]->genero);
+                printf("Duracao: %d\n", busca->chave[i]->duracao);
             }
         }
     } else {

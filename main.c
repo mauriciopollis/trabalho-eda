@@ -25,9 +25,12 @@ int main(void) {
 
     //TARVB_imprime_crescente(a);
 
-    //TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
+    TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
 
-    //TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
+
+    TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
+
+    // TARVB_busca_info_subordinada(a, "Friends S1E3: The One with the Thumb", 1994);
 
     //TARVB_modifica_secundarias(a, "Star Wars Episode IV A New Hope", 1977, "Ninguem", "Nenhum", 0);
 
