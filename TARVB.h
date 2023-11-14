@@ -19,7 +19,7 @@ void TARVB_libera(TARVB *a);
 TARVB *TARVB_cria(int t);
 
 /*Busca se o filme está na árvore*/
-TARVB *TARVB_busca(TARVB *a, char *titulo, int ano);
+TFILME *TARVB_busca(TARVB *a, char *titulo, int ano);
 
 /*Insere o filme na árvore*/
 TARVB *TARVB_insere_filme(TARVB *a, char *titulo, int ano, char *diretor, char *genero, int duracao, int t);
@@ -47,3 +47,21 @@ int TARVB_conta_nos(TARVB *a);
 
 /*Retorna o número de filmes na árvore*/
 int TARVB_conta_filmes(TARVB *a);
+
+/*Função principal para remoção de filmes*/
+TARVB* TARVB_retira(TARVB* arv, char *titulo, int ano, int t);
+
+/**/
+TARVB *TARVB_libera_remocao(TARVB *a);
+
+/*Função auxiliar para remoção de filmes*/
+TARVB* TARVB_remove(TARVB* arv, TFILME *filme, int t);
+
+/*Remove todos os filmes de um diretor*/
+TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t);
+
+/*Remove todos os filmes de uma franquia*/
+TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t);
+
+/*Busca se existe um filme do diretor na árvore*/
+TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor);

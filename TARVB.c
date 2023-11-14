@@ -19,14 +19,14 @@ TARVB *TARVB_cria(int t) {
     return a;
 }
 
-TARVB *TARVB_busca(TARVB *a, char *titulo, int ano) {
+TFILME *TARVB_busca(TARVB *a, char *titulo, int ano) {
     if(a != NULL) {
         int i = 0;
         while((i < a->nch) && TFILME_compara_titulo_ano(titulo, ano, a->chave[i]->titulo, a->chave[i]->ano) > 0) {
             i++;
         }
         if((i < a->nch) && TFILME_compara_titulo_ano(titulo, ano, a->chave[i]->titulo, a->chave[i]->ano) == 0) {
-            return a;
+            return a->chave[i];
         }
         return TARVB_busca(a->filho[i], titulo, ano);
     }
@@ -34,7 +34,7 @@ TARVB *TARVB_busca(TARVB *a, char *titulo, int ano) {
 }
 
 TARVB *TARVB_insere_filme(TARVB *a, char *titulo, int ano, char *diretor, char *genero, int duracao, int t) {
-    TARVB *busca = TARVB_busca(a, titulo, ano);
+    TFILME *busca = TARVB_busca(a, titulo, ano);
     if(busca != NULL) return a;
     
     TFILME *filme = TFILME_cria(titulo, ano, diretor, genero, duracao);
@@ -196,34 +196,24 @@ void TARVB_imprime_crescente(TARVB *a) {
 }
 
 void TARVB_busca_info_subordinada(TARVB *a, char *titulo, int ano) {
-    TARVB *busca = TARVB_busca(a, titulo, ano);
+    TFILME *busca = TARVB_busca(a, titulo, ano);
     if(busca != NULL) {
-        int i = 0;
-        for(i = 0; i<busca->nch; i++) {
-            if(TFILME_compara_titulo_ano(titulo, ano, busca->chave[i]->titulo, busca->chave[i]->ano) == 0) {
-                printf("Diretor: %s\n", busca->chave[i]->diretor);
-                printf("Gênero: %s\n", busca->chave[i]->genero);
-                printf("Duracao: %d\n", busca->chave[i]->duracao);
-            }
-        }
+        printf("Diretor: %s\n", busca->diretor);
+        printf("Gênero: %s\n", busca->genero);
+        printf("Duracao: %d\n", busca->duracao);
     } else {
         printf("Filme não está na árvore\n");
     }
 }
 
 void TARVB_modifica_secundarias(TARVB *a, char *titulo, int ano, char *novo_diretor, char *novo_genero, int nova_duracao) {
-    TARVB *busca = TARVB_busca(a, titulo, ano);
+    TFILME *busca = TARVB_busca(a, titulo, ano);
     if(busca != NULL) {
-        int i = 0;
-        for(i = 0; i<busca->nch; i++) {
-            if(TFILME_compara_titulo_ano(titulo, ano, a->chave[i]->titulo, a->chave[i]->ano) == 0) {
-                strcpy(a->chave[i]->diretor, novo_diretor);
-                strcpy(a->chave[i]->genero, novo_genero);
-                a->chave[i]->duracao = nova_duracao;
-                printf("Informações secundárias alteradas\n");
-                TFILME_imprime(a->chave[i]);
-            }
-        }
+        strcpy(busca->diretor, novo_diretor);
+        strcpy(busca->genero, novo_genero);
+        busca->duracao = nova_duracao;
+        printf("Informações secundárias alteradas\n");
+        TFILME_imprime(busca);
     } else {
         printf("Filme não está na árvore\n");
     }
