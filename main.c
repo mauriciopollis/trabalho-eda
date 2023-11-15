@@ -1,7 +1,7 @@
-#include "TARVB.h"
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include "TARVB.c"
 
 int main(void) {
 
@@ -25,7 +25,7 @@ int main(void) {
 
     //TARVB_imprime_crescente(a);
 
-    TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
+    // TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
 
 
     TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);

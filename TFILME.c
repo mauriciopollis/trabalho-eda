@@ -1,6 +1,5 @@
 #include "TFILME.h"
-#include<stdio.h>
-#include<string.h>
+
 
 TFILME *TFILME_cria(char *titulo, int ano, char *diretor, char *genero, int duracao) {
     TFILME *novo_filme = (TFILME *) malloc(sizeof(TFILME));
