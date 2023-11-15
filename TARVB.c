@@ -522,11 +522,33 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
     return a;
 }
 
-TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t);
+TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t) {
+    TFILME *busca = TARVB_busca_filme_diretor(a, diretor);
+    while(busca != NULL) {
+        a = TARVB_remove_filme(a, busca->titulo, busca->ano, t);
+        busca = TARVB_busca_filme_diretor(a, diretor);
+    }
+    return a;
+}
 
 TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t);
 
-TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor);
+TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor) {
+    if(a == NULL) return NULL;
+
+    if(a->folha) {
+        for(int i=0; i<a->nch; i++) {
+            if(strcmp(a->chave[i]->diretor, diretor) == 0) return a->chave[i];
+        }
+        return NULL;
+    }
+    for(int i=0; i<a->nch; i++) {
+        TFILME *filme = TARVB_busca_filme_diretor(a->filho[i], diretor);
+        if(filme != NULL) return filme;
+        if(strcmp(a->chave[i]->diretor, diretor) == 0) return a->chave[i];
+    }
+    return TARVB_busca_filme_diretor(a->filho[a->nch], diretor);
+}
 
 void TARVB_libera_remocao(TARVB *a, int t) {
     for(int i=0; i<(2*t-1); i++) {
