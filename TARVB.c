@@ -438,23 +438,51 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
         // merge a->filho[i] com um irmão, o que envolve mover uma chave de a para o novo filho "merged" para ser a chave média desse novo nó "merged"
         if(i < a->nch && a->filho[i+1]->nch == (t-1)) { // vizinho da frente é válido (3B)
             printf("\nCASO 3B: i menor que nch\n");
+            z = a->filho[i+1];
 
             //copiar a->chave[i] para a posição mais à direita de y
+            y->chave[y->nch] = a->chave[i];
+            y->nch += 1;
 
-            // copiar as t-1 chaves de z para o novo no "merge"
-            // copiar as t raizes de z para o novo no "merge"
+            // copiar as t-1 chaves de z para o novo nó "merge"
+            for(int j=0; j<(t-1); j++) {
+                y->chave[j+t] = z->chave[j];
+            }
+            // copiar as t raizes de z para o novo nó "merge"
+            for(int j=0; j<t; j++) {
+                y->filho[j+t] = z->filho[j];
+            }
+            y->nch = 2*t-1;
 
             //mover todos os nós e filhos de a uma unidade para a esquerda
+            for(int j=i; j<a->nch; j++) {
+                a->chave[j] = a->chave[j+1];
+            }
+            for(int j=(i+1); j<=a->nch; j++) {
+                a->filho[j] = a->filho[j+1];
+            }
+            a->nch -= 1;
 
+            if(a->nch == 0) {
+                TARVB *temp = a;
+                a = a->filho[0];
+                temp->filho[0] = NULL;
+                TARVB_libera(temp);
+            }
             // liberar o antigo nó z
+            TARVB_libera_remocao(z, t);
 
             // continuar a recursão
+            a = TARVB_remove_filme_aux(a, filme, t);
+
+            return a;
         }
         if((i > 0) && a->filho[i-1]->nch == (t-1)) { // vizinho da frente não é válido, olhar no vizinho de trás (3B)
             printf("\nCASO 3B: i igual a nch\n");
+            z = a->filho[i-1];
 
             // copiar a->chave[i-1] para z
-
+            
             // copiar as t-1 chaves de y para o novo nó "merged"
             // copiar os t filhos de y para o novo nó "merged"
 
