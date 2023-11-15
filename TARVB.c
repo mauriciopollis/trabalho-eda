@@ -274,32 +274,34 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
     if(a == NULL) return a;
 
     printf("Removendo %s(%d)\n", filme->titulo, filme->ano);
-    if(a->folha) { //CASO 1 - CHEGOU EM UMA FOLHA
-        printf("\nCASO 1\n");
-        int i = 0;
-        while(i < a->nch && TFILME_compara_filmes(filme, a->chave[i]) > 0) i++;
-        if(i<a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) {
-            // remover o filme que está em a->chave[i];
-
-            // movendo as chaves uma posição para a esquerda
-            for(int j=i; i<(a->nch-1); i++) {
-                a->chave[i] = a->chave[i+1];
-            }
-            a->nch -= 1;
-
-            if(a->nch == 0) {
-                TARVB_libera(a);
-                a = NULL;
-            }
-            return a;
-        }
-        // não achou o filme
-        return a;
-    }
-    // CHEGOU EM UM NÓ INTERNO
     int i = 0;
     while(i < a->nch && TFILME_compara_filmes(filme, a->chave[i]) > 0) i++;
-    if(i < a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) { //nó contém o filme -> casos 2a, 2b ou 2c
+    if(i<a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) { // CASOS 1, 2A, 2B, 2C
+        if(a->folha) { //CASO 1 - CHEGOU EM UMA FOLHA
+            printf("\nCASO 1\n");
+            if(i<a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) {
+                // remover o filme que está em a->chave[i];
+
+                // movendo as chaves uma posição para a esquerda
+                for(int j=i; i<(a->nch-1); i++) {
+                    a->chave[i] = a->chave[i+1];
+                }
+                a->nch -= 1;
+                
+                // padronizando o lixo
+                a->chave[a->nch] = NULL;
+                a->filho[a->nch+1] = NULL;
+
+                if(a->nch == 0) {
+                    TARVB_libera(a);
+                    a = NULL;
+                }
+                return a;
+            }
+            // não achou o filme
+            return a;
+        }
+        // CHEGOU EM UM NÓ INTERNO
         if(a->filho[i]->nch >= t) { // CASO 2A
             printf("\nCASO 2A\n");
             // achar o predecessor k' de k na subárvore a->filho[i]
