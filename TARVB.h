@@ -68,3 +68,9 @@ TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t);
 
 /*Busca se existe um filme do diretor na árvore*/
 TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor);
+
+/*Imprime a árvore de forma hierárquica*/
+void TARVB_imprime_vis(TARVB *a, int nivel);
+
+/*Imprime a árvore de forma hierárquica*/
+void TARVB_imprime_rec(TARVB *a, int nivel);

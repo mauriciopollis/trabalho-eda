@@ -536,3 +536,37 @@ void TARVB_libera_remocao(TARVB *a, int t) {
     free(a->filho);
     free(a);
 }
+
+void TARVB_imprime_vis(TARVB *a, int nivel) {
+    for(int i=0; i<nivel; i++) {
+        printf("         ");
+    }
+    int length = 5;
+    if(a->folha) {
+        for(int i=a->nch-1; i>=0; i++) {
+            //printf("%*.*s(%d)\n", length, length, a->chave[i]->titulo, a->chave[i]->ano);
+            printf("%s(%d)\n", a->chave[i]->titulo, a->chave[i]->ano);
+        }
+    } else {
+        for(int i=a->nch-1; i>0; i--) {
+            TARVB_imprime_vis(a->filho[i+1], nivel+1);
+            //printf("%*.*s(%d)\n", length, length, a->chave[i]->titulo, a->chave[i]->ano);
+            printf("%s(%d)\n", a->chave[i]->titulo, a->chave[i]->ano);
+        }
+        TARVB_imprime_vis(a->filho[0], nivel+1);
+    }
+}
+
+void TARVB_imprime_rec(TARVB *a, int andar) {
+    if(a != NULL) {
+        int i, j;
+        for(i = 0; i<=a->nch-1; i++) {
+            TARVB_imprime_rec(a, andar+1);
+            for(j = 0; j<=andar; j++) {
+                printf("        ");
+            }
+            printf("(%d)\n", a->chave[i]->ano);
+        }
+        TARVB_imprime_rec(a->filho[i], andar+1);
+    }
+}

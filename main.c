@@ -23,13 +23,19 @@ int main(void) {
     
     fclose(f);
 
+    TARVB_imprime_rec(a, 0);
+
     //TARVB_imprime_crescente(a);
 
     //TARVB *teste = TARVB_busca(a, "Star Wars Episode IV A New Hope", 1977);
-    printf("%s %d %d\n", a->chave[0]->titulo, a->chave[0]->ano, a->folha);
+    //printf("%s %d %d\n", a->chave[0]->titulo, a->chave[0]->ano, a->folha);
     
     //printf("%d\n", TARVB_conta_filmes(a));
     //a = TARVB_remove_filme(a, "Friends S2E16: The One Where Joey Moves Out",1996, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
     //printf("%d\n", TARVB_conta_filmes(a));
 
     //TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
