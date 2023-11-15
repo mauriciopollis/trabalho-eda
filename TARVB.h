@@ -74,3 +74,6 @@ void TARVB_imprime_vis(TARVB *a, int nivel);
 
 /*Imprime a árvore de forma hierárquica*/
 void TARVB_imprime_rec(TARVB *a, int nivel);
+
+/*Tentativa de adaptar a função da biblioteca da professora*/
+TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t);
