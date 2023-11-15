@@ -482,15 +482,36 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
             z = a->filho[i-1];
 
             // copiar a->chave[i-1] para z
+            z->chave[t-1] = a->chave[i-1];
             
             // copiar as t-1 chaves de y para o novo nó "merged"
+            for(int j=0; j<t-1; j++) {
+                z->chave[j+t] = y->chave[j];
+            }
             // copiar os t filhos de y para o novo nó "merged"
-
+            for(int j=0; j<t; j++) {
+                z->filho[j+t+1] = y->filho[j];
+            }
+            z->nch = 2*t-1;
+            
             // liberar o antigo nó y
+            TARVB_libera_remocao(y, t);
 
             //mover todos os nós e filhos de a uma unidade para a esquerda
+            a->nch -= 1;
+            if(a->nch == 0) {
+                TARVB *temp = a;
+                a = a->filho[0];
+                temp->filho[0] = NULL;
+                TARVB_libera(temp);
+            } else {
+                a->filho[i-1];
+            }
 
             // continuar a recursão
+            a = TARVB_remove_filme_aux(a, filme, t);
+
+            return a;
         }
     }
 
