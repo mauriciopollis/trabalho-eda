@@ -78,12 +78,13 @@ TARVB *TARVB_divide_raiz(TARVB *a, int t) {
     // copia chaves adequadas do filho esquerdo para o filho direito
     for(int i=t; i<(2*t-1); i++) {
         novo_filho->chave[i - t] = a->chave[i];
+        a->chave[i] = NULL;
     }
 
     // copia os filhos adequados do filho esquerdo para o filho direito
     for(int i=t; i<(2*t); i++) {
         novo_filho->filho[i - t] = a->filho[i];
-        //a->filho[i] = NULL; // isso é necessário ou posso considerar que todas as chaves de índice i >= t e seus filhos são todos "lixo"? 
+        a->filho[i] = NULL; // isso é necessário ou posso considerar que todas as chaves de índice i >= t e seus filhos são todos "lixo"? 
     }
 
     // "deleta" as chave do filho esquerdo
@@ -146,8 +147,9 @@ TARVB *TARVB_divide(TARVB *pai, int indice, TARVB *filho_esq, int t) {
     novo_direita->nch = t - 1;
 
     // copia as chaves que devem ser transferidas para o filho da direita que foi criado
-    for(int i=t; i<filho_esq->nch; i++) {
+    for(int i=t; i<(2*t-1); i++) {
         novo_direita->chave[i - t] = filho_esq->chave[i];
+        filho_esq->chave[i] = NULL;
     }
 
     // copia os filhos que devem ser transferidos para o filho da direita que foi criado
@@ -156,20 +158,20 @@ TARVB *TARVB_divide(TARVB *pai, int indice, TARVB *filho_esq, int t) {
         filho_esq->filho[i] = NULL; // elimina a ligação que o filho da esquerda tinha com os nós que agora serão filhos da direita
     }
 
-    // desloca as chaves do pai maiores que pai->chave[indice] uma unidade para a direita
+    // desloca as chaves do pai maiores ou iguais a pai->chave[indice] uma unidade para a direita
     int j;
     for(j=pai->nch; j>indice; j--) {
         pai->chave[j] = pai->chave[j - 1];
     }
+    // desloca os filhos do pai maiores que pai->filho[indice] uma unidade para a direita
+    for(j = pai->nch+1; j>(indice + 1); j--) {
+        pai->filho[j] = pai->filho[j - 1];
+    }
 
     // copia elemento central do filho para o pai
     pai->chave[indice] = filho_esq->chave[t - 1];
+    filho_esq->chave[t-1] = NULL;
     pai->nch += 1;
-
-    // desloca os filhos do pai maiores que pai->filho[indice] uma unidade para a direita
-    for(j = pai->nch; j>(indice + 1); j--) {
-        pai->filho[j] = pai->filho[j - 1];
-    }
 
     // redefine o tamanho do vizinho da esquerda
     filho_esq->nch = t - 1;
@@ -276,7 +278,7 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
         printf("\nCASO 1\n");
         int i = 0;
         while(i < a->nch && TFILME_compara_filmes(filme, a->chave[i]) > 0) i++;
-        if(a->nch<(2*t-1) && TFILME_compara_filmes(filme, a->chave[i]) == 0) {
+        if(i<a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) {
             // remover o filme que está em a->chave[i];
 
             // movendo as chaves uma posição para a esquerda
