@@ -438,9 +438,31 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
         // merge a->filho[i] com um irmão, o que envolve mover uma chave de a para o novo filho "merged" para ser a chave média desse novo nó "merged"
         if(i < a->nch && a->filho[i+1]->nch == (t-1)) { // vizinho da frente é válido (3B)
             printf("\nCASO 3B: i menor que nch\n");
+
+            //copiar a->chave[i] para a posição mais à direita de y
+
+            // copiar as t-1 chaves de z para o novo no "merge"
+            // copiar as t raizes de z para o novo no "merge"
+
+            //mover todos os nós e filhos de a uma unidade para a esquerda
+
+            // liberar o antigo nó z
+
+            // continuar a recursão
         }
         if((i > 0) && a->filho[i-1]->nch == (t-1)) { // vizinho da frente não é válido, olhar no vizinho de trás (3B)
             printf("\nCASO 3B: i igual a nch\n");
+
+            // copiar a->chave[i-1] para z
+
+            // copiar as t-1 chaves de y para o novo nó "merged"
+            // copiar os t filhos de y para o novo nó "merged"
+
+            // liberar o antigo nó y
+
+            //mover todos os nós e filhos de a uma unidade para a esquerda
+
+            // continuar a recursão
         }
     }
 
