@@ -582,6 +582,7 @@ TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t) {
     if(i < a->nch && TFILME_compara_filmes(filme, a->chave[i]) == 0) { //CASOS 1, 2A, 2B e 2C
         if(a->folha){ //CASO 1
             printf("\nCASO 1\n");
+            TFILME_libera(a->chave[i]);
             int j;
             for(j=i; j<a->nch-1;j++) a->chave[j] = a->chave[j+1];
             a->nch--;

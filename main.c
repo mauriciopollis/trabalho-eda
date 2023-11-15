@@ -45,14 +45,14 @@ int main(void) {
     printf("%d\n", TARVB_conta_filmes(a));
     a = TARVB_remove_filme(a, "Dances with Wolves", 1990, t);
     printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filme(a, "The Exorcist", 1973, t);
-    printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filme(a, "The Walking Dead S1E1: Days Gone Bye", 2010, t);
-    printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filme(a, "The Walking Dead S1E2: Guts", 2010, t);
-    printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filme(a, "The Walking Dead S1E3: Tell It to the Frogs", 2010, t);
-    printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "The Exorcist", 1973, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "The Walking Dead S1E1: Days Gone Bye", 2010, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "The Walking Dead S1E2: Guts", 2010, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "The Walking Dead S1E3: Tell It to the Frogs", 2010, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
     //a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
     //printf("%d\n", TARVB_conta_filmes(a));
 
