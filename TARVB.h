@@ -77,3 +77,6 @@ void TARVB_imprime_rec(TARVB *a, int nivel);
 
 /*Tentativa de adaptar a função da biblioteca da professora*/
 TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t);
+
+/*Busca um filme da franquia na árvore*/
+TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia);

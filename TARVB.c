@@ -531,8 +531,6 @@ TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t) {
     return a;
 }
 
-TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t);
-
 TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor) {
     if(a == NULL) return NULL;
 
@@ -780,4 +778,30 @@ TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t) {
     }  
     a->filho[i] = TARVB_remove_filme_aux_prof(a->filho[i], filme, t);
     return a;
+}
+
+TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t) {
+    if(a == NULL) return a;
+    TFILME *filme = TARVB_busca_filme_franquia(a, franquia);
+    while(filme != NULL) {
+        a = TARVB_remove_filme(a, filme->titulo, filme->ano, t);
+        filme = TARVB_busca_filme_franquia(a, franquia);
+    }
+    return a;
+}
+
+TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia) {
+    if(a == NULL) return NULL;
+    if(a->folha) {
+        for(int i=0; i<a->nch; i++) {
+            if(strstr(a->chave[i]->titulo, franquia) != NULL) return a->chave[i];
+        }
+        return NULL;
+    }
+    for(int i=0; i<a->nch; i++) {
+        TFILME *filme = TARVB_busca_filme_franquia(a->filho[i], franquia);
+        if(filme != NULL) return filme;
+        if(strstr(a->chave[i]->titulo, franquia) != NULL) return a->chave[i];
+    }
+    return TARVB_busca_filme_franquia(a->filho[a->nch], franquia);
 }

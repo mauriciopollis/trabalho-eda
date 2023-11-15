@@ -54,9 +54,19 @@ int main(void) {
     //a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
     //printf("%d\n", TARVB_conta_filmes(a));
 
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filmes_diretor(a, "Michael Lembeck", t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filmes_franquia(a, "Star Wars Episode", t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+
+    //a = TARVB_remove_filmes_franquia(a, "The Walking Dead", t);
     printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filmes_diretor(a, "Michael Lembeck", t);
+    a = TARVB_remove_filmes_franquia(a, "Friends S3", t);
     printf("%d\n", TARVB_conta_filmes(a));
+
     //TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
 
     // TARVB_busca_info_subordinada(a, "Friends S1E3: The One with the Thumb", 1994);
