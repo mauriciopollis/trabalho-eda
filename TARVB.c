@@ -383,120 +383,68 @@ TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t) {
     // se a->filho[i]->nch = t-1, executar 3a ou 3b para garantir que irá descer para um nó com nch >=t
     // então, fazer a recursão no filho apropriado
     
-    // rascunho: 
-    //if(a->filho[i]->nch == (t-1) && (a->filho[i-1]->nch>=t || a->filho[i+1]->nch>=t)) { // CASO 3A
-    //    printf("\nCASO 3A\n");
-        // dar uma chave extra para a->filho[i], movento uma chave de a para a->filho[i], movendo uma chave de a->filho[i-1](ou a->filho[i+1]) para a, e movendo o filho apropriado do irmão para a->filho[i]
-
-    //}
-    //if(a->filho[i]->nch == (t-1) && a->filho[i-1]->nch == (t-1) && a->filho[i+1]->nch == (t-1)) { // CASO 
-    //    printf("\nCASO 3B\n");
-        // merge a->filho[i] com um irmão, o que envolve mover uma chave de a para o novo filho "merged" para ser a chave média desse novo nó "merged"
-    //}
-
-    // professora adaptado:
     TARVB *y = a->filho[i], *z = NULL;
-    if (y->nch == t-1) { //CASOS 3A e 3B
-        if((i < a->nch) && (a->filho[i+1]->nch >=t)) { //CASO 3A
-            printf("\nCASO 3A: i menor que nchaves\n");
+    if(y->nch == (t-1)) { // CASOS 3A E 3B
+        // dar uma chave extra para a->filho[i], movendo uma chave de a para a->filho[i], movendo uma chave de a->filho[i+1](ou a->filho[i-1]) para a, 
+        //e movendo o filho apropriado do irmão para a->filho[i]
+        if((i < a->nch) && (a->filho[i+1]->nch>=t)) { // vizinho da frente é válido (3A)
+            printf("\nCASO 3A: i menor que nch\n");
             z = a->filho[i+1];
-            y->chave[t-1] = a->chave[i];   //dar a y a chave i da arv
-            y->nch++;
-            a->chave[i] = z->chave[0];     //dar a arv uma chave de z
-            int j;
-            for(j=0; j < z->nch-1; j++)  //ajustar chaves de z
+
+            // passar a->chave[i] para y
+            y->chave[y->nch] = a->chave[i];
+            y->nch += 1;
+            y->filho[y->nch] = z->filho[0]; // passa o menor filho de z para o maior filho de y
+
+            // passar z->chave[0] para a->chave[i]
+            a->chave[i] = z->chave[0];
+
+            // desloca chaves e filhos de z uma unidade para a esquerda
+            for(int j=0; j<(z->nch-1); j++) {
                 z->chave[j] = z->chave[j+1];
-            y->filho[y->nch] = z->filho[0]; //enviar ponteiro menor de z para o novo elemento em y
-            for(j=0; j < z->nch; j++)       //ajustar filhos de z
+            }
+            for(int j=0; j<z->nch; j++) {
                 z->filho[j] = z->filho[j+1];
-            z->nch--;
+            }
+            z->nch -= 1;
+
+            // continuar a remoção recursiva em y
             a->filho[i] = TARVB_remove_filme_aux(a->filho[i], filme, t);
-            return a;
         }
-        if((i > 0) && (!z) && (a->filho[i-1]->nch >=t)) { //CASO 3A
-            printf("\nCASO 3A: i igual a nchaves\n");
+        if((i > 0) && (a->filho[i-1]->nch>=t)) { // vizinho da frente não é válido, olhar no vizinho de trás (3A)
+            printf("\nCASO 3A: i igual a nch\n");
             z = a->filho[i-1];
-            int j;
-            for(j = y->nch; j>0; j--)               //encaixar lugar da nova chave
-                y->chave[j] = y->chave[j-1];
-            for(j = y->nch+1; j>0; j--)             //encaixar lugar dos filhos da nova chave
+
+            // deslocando todas as chaves e filhos de y uma unidade para a direita para abrir espaço para a nova chave vinda de a
+            for(int j=y->nch; j>0; j--) {
+                y->chave[j] = y->chave[j - 1];
+            }
+            for(int j=(y->nch+1); j>0; j++) {
                 y->filho[j] = y->filho[j-1];
-            y->chave[0] = a->chave[i-1];              //dar a y a chave i da arv
-            y->nch++;
-            a->chave[i-1] = z->chave[z->nch-1];   //dar a arv uma chave de z
-            y->filho[0] = z->filho[z->nch];         //enviar ponteiro de z para o novo elemento em y
-            z->nch--;
+            }
+            y->chave[0] = a->chave[i-1]; // transfere maior chave de a para menor chave de y
+            y->nch += 1;
+            a->chave[i-1] = z->chave[z->nch-1]; // passa a maior chave de z para a maior chave de a
+
+            y->filho[0] = z->filho[z->nch]; // transfere o maior filho de z para o menor filho de y
+
+            z->nch -=1;
+
+            // continuar a remoção recursiva em y
             a->filho[i] = TARVB_remove_filme_aux(y, filme, t);
             return a;
         }
-        if(!z) { //CASO 3B
-            if(i < a->nch && a->filho[i+1]->nch == t-1) {
-                printf("\nCASO 3B: i menor que nchaves\n");
-                z = a->filho[i+1];
-                y->chave[t-1] = a->chave[i];     //pegar chave [i] e coloca ao final de filho[i]
-                y->nch++;
-                int j;
-                for(j=0; j < t-1; j++){
-                    y->chave[t+j] = z->chave[j];     //passar filho[i+1] para filho[i]
-                    y->nch++;
-                }
-                if(!y->folha){
-                    for(j=0; j<t; j++){
-                        y->filho[t+j] = z->filho[j];
-                        z->filho[j] = NULL; //ultima revisao: 04/2020
-                    }
-                }
-                TARVB_libera(z);
-                for(j=i; j < a->nch-1; j++){ //limpar referências de i
-                    a->chave[j] = a->chave[j+1];
-                    a->filho[j+1] = a->filho[j+2];
-                }
-                a->filho[a->nch] = NULL;
-                a->nch--;
-                if(!a->nch){ //ultima revisao: 04/2020
-                    TARVB *temp = a;
-                    a = a->filho[0];
-                    temp->filho[0] = NULL;
-                    TARVB_libera(temp);
-                }
-                a = TARVB_remove_filme_aux(a, filme, t);
-                return a;
-            }
-            if((i > 0) && (a->filho[i-1]->nch == t-1)) { 
-                printf("\nCASO 3B: i igual a nchaves\n");
-                z = a->filho[i-1];
-                if(i == a->nch)
-                    z->chave[t-1] = a->chave[i-1]; //pegar chave[i] e poe ao final de filho[i-1]
-                else
-                    z->chave[t-1] = a->chave[i];   //pegar chave [i] e poe ao final de filho[i-1]
-                z->nch++;
-                int j;
-                for(j=0; j < t-1; j++){
-                    z->chave[t+j] = y->chave[j];     //passar filho[i+1] para filho[i]
-                    z->nch++;
-                }
-                if(!z->folha){
-                    for(j=0; j<t; j++){
-                        z->filho[t+j] = y->filho[j];
-                        y->filho[j] = NULL; //ultima revisao: 04/2020
-                    }
-                }
-                TARVB_libera(y);
-                a->filho[a->nch] = NULL;
-                a->nch--;
-                if(!a->nch){ //ultima revisao: 04/2020
-                    TARVB *temp = a;
-                    a = a->filho[0];
-                    temp->filho[0] = NULL;
-                    TARVB_libera(temp);
-                }
-                else a->filho[i-1] = z;
-                a = TARVB_remove_filme_aux(a, filme, t);
-                return a;
-            }
+        
+        // merge a->filho[i] com um irmão, o que envolve mover uma chave de a para o novo filho "merged" para ser a chave média desse novo nó "merged"
+        if(i < a->nch && a->filho[i+1]->nch == (t-1)) { // vizinho da frente é válido (3B)
+            printf("\nCASO 3B: i menor que nch\n");
         }
-    }  
-    a->filho[i] = TARVB_remove_filme_aux(a->filho[i], filme, t);
+        if((i > 0) && a->filho[i-1]->nch == (t-1)) { // vizinho da frente não é válido, olhar no vizinho de trás (3B)
+            printf("\nCASO 3B: i igual a nch\n");
+        }
+    }
+
+    a->filho[i] = TARVB_remove_filme_aux(a->filho[i], filme, t); // a->filho[i]->nch>=t
     return a;
 }
 
