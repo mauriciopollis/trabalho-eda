@@ -51,11 +51,14 @@ int TARVB_conta_filmes(TARVB *a);
 /*Função principal para remoção de filmes*/
 TARVB* TARVB_retira(TARVB* arv, char *titulo, int ano, int t);
 
-/**/
-TARVB *TARVB_libera_remocao(TARVB *a);
+/*Liberação especial dos nós que devem ser liberados na etapa 2c*/
+void TARVB_libera_remocao(TARVB *a, int t);
+
+/*Função principal para remoção de filmes*/
+TARVB *TARVB_remove_filme(TARVB *a, char *titulo, int ano, int t);
 
 /*Função auxiliar para remoção de filmes*/
-TARVB* TARVB_remove(TARVB* arv, TFILME *filme, int t);
+TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t);
 
 /*Remove todos os filmes de um diretor*/
 TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t);
