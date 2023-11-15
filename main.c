@@ -37,8 +37,6 @@ int main(void) {
     a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
     printf("%d\n", TARVB_conta_filmes(a));
 
-    a = TARVB_remove_filme(a, "The Walking Dead S1E3: Tell It to the Frogs", 2010, t);
-    printf("%d\n", TARVB_conta_filmes(a));
     a = TARVB_remove_filme(a, "Schindlers List", 1993, t);
     printf("%d\n", TARVB_conta_filmes(a));
     a = TARVB_remove_filme(a, "Gifted Hands: The Ben Carson Story", 2009, t);
@@ -53,8 +51,10 @@ int main(void) {
     printf("%d\n", TARVB_conta_filmes(a));
     a = TARVB_remove_filme(a, "The Walking Dead S1E2: Guts", 2010, t);
     printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
+    a = TARVB_remove_filme(a, "The Walking Dead S1E3: Tell It to the Frogs", 2010, t);
     printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "Friends S1E3: The One with the Thumb", 1994, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
 
     //TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
 

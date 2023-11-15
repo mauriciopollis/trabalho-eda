@@ -586,7 +586,7 @@ TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t) {
             for(j=i; j<a->nch-1;j++) a->chave[j] = a->chave[j+1];
             a->nch--;
             if(!a->nch) { //ultima revisao: 04/2020
-                TARVB_libera(a);
+                TARVB_libera_remocao(a, t);
                 a = NULL;
             }
             return a;      
@@ -716,7 +716,7 @@ TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t) {
                     TARVB *temp = a;
                     a = a->filho[0];
                     temp->filho[0] = NULL;
-                    TARVB_libera(temp);
+                    TARVB_libera_remocao(temp, t);
                 }
                 a = TARVB_remove_filme_aux_prof(a, filme, t);
                 return a;
@@ -740,14 +740,14 @@ TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t) {
                         y->filho[j] = NULL; //ultima revisao: 04/2020
                     }
                 }
-                TARVB_libera(y);
+                TARVB_libera_remocao(y, t);
                 a->filho[a->nch] = NULL;
                 a->nch--;
                 if(!a->nch){ //ultima revisao: 04/2020
                     TARVB *temp = a;
                     a = a->filho[0];
                     temp->filho[0] = NULL;
-                    TARVB_libera(temp);
+                    TARVB_libera_remocao(temp, t);
                 }
                 else a->filho[i-1] = z;
                 a = TARVB_remove_filme_aux_prof(a, filme, t);
