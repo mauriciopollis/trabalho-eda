@@ -48,17 +48,14 @@ int TARVB_conta_nos(TARVB *a);
 /*Retorna o número de filmes na árvore*/
 int TARVB_conta_filmes(TARVB *a);
 
-/*Função principal para remoção de filmes*/
-TARVB* TARVB_retira(TARVB* arv, char *titulo, int ano, int t);
-
-/*Liberação especial dos nós que devem ser liberados na etapa 2c*/
+/*Função de liberação especial de nós usada durante a remoção de um filme da árvore*/
 void TARVB_libera_remocao(TARVB *a, int t);
 
 /*Função principal para remoção de filmes*/
 TARVB *TARVB_remove_filme(TARVB *a, char *titulo, int ano, int t);
 
-/*Função auxiliar para remoção de filmes*/
-TARVB* TARVB_remove_filme_aux(TARVB* a, TFILME *filme, int t);
+/*Função auxiliar para remoção de filmes (adaptada da biblioteca da professora)*/
+TARVB *TARVB_remove_filme_aux(TARVB *a, TFILME *filme, int t);
 
 /*Remove todos os filmes de um diretor*/
 TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t);
@@ -69,14 +66,11 @@ TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t);
 /*Busca se existe um filme do diretor na árvore*/
 TFILME *TARVB_busca_filme_diretor(TARVB *a, char *diretor);
 
+/*Busca um filme da franquia na árvore*/
+TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia);
+
 /*Imprime a árvore de forma hierárquica*/
 void TARVB_imprime_vis(TARVB *a, int nivel);
 
 /*Imprime a árvore de forma hierárquica*/
 void TARVB_imprime_rec(TARVB *a, int nivel);
-
-/*Tentativa de adaptar a função da biblioteca da professora*/
-TARVB *TARVB_remove_filme_aux_prof(TARVB *a, TFILME *filme, int t);
-
-/*Busca um filme da franquia na árvore*/
-TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia);
