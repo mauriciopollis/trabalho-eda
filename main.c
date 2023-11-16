@@ -62,10 +62,34 @@ int main(void) {
     //a = TARVB_remove_filmes_franquia(a, "Star Wars Episode", t);
     //printf("%d\n", TARVB_conta_filmes(a));
 
+    printf("%d\n", TARVB_conta_filmes(a));
+    a = TARVB_remove_filmes_franquia(a, "Friends", t);
+    printf("%d\n", TARVB_conta_filmes(a));
+    a = TARVB_remove_filmes_franquia(a, "Star Wars", t);
+    printf("%d\n", TARVB_conta_filmes(a));
     //a = TARVB_remove_filmes_franquia(a, "The Walking Dead", t);
-    printf("%d\n", TARVB_conta_filmes(a));
-    a = TARVB_remove_filmes_franquia(a, "Friends S3", t);
-    printf("%d\n", TARVB_conta_filmes(a));
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //a = TARVB_remove_filme(a, "Forrest Gump", 1994, t);
+    //a = TARVB_remove_filme(a, "The Theory of Everything", 2014, t);
+    //a = TARVB_remove_filme(a, "The Physician", 2013, t);
+    //a = TARVB_remove_filme(a, "The Man Who Knew Infinity", 2015, t);
+    //a = TARVB_remove_filme(a, "E.T. the Extra-Terrestrial", 1982, t);
+    //a = TARVB_remove_filme(a, "Back to the Future", 1985, t);
+    //a = TARVB_remove_filme(a, "300", 2006, t);
+    //a = TARVB_remove_filme(a, "Pride & Prejudice", 2005, t);
+    //a = TARVB_remove_filme(a, "Snow White and the Seven Dwarfs", 1937, t);
+    //a = TARVB_remove_filme(a, "Snow White and the Huntsman", 2012, t);
+    //a = TARVB_remove_filme(a, "Pretty Woman", 1990, t);
+    //a = TARVB_remove_filme(a, "Mr. & Mrs. Smith", 2005, t);
+    //a = TARVB_remove_filme(a, "Schindlers List", 1993, t);
+    //a = TARVB_remove_filme(a, "Gifted Hands: The Ben Carson Story", 2009, t);
+    //a = TARVB_remove_filme(a, "The Avengers", 2012, t);
+    //a = TARVB_remove_filme(a, "Dances with Wolves", 1990, t);
+    //a = TARVB_remove_filme(a, "The Exorcist", 1973, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
+    //if(a == NULL) printf("null\n");
+    //a = TARVB_remove_filme(a, "The Exorcist", 1973, t);
+    //printf("%d\n", TARVB_conta_filmes(a));
 
     //TARVB_busca_info_subordinada(a, "Star Wars Episode IV A New Hope", 1977);
 
