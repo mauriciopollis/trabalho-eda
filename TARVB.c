@@ -273,7 +273,7 @@ TARVB *TARVB_remove_filme(TARVB *a, char *titulo, int ano, int t) {
 TARVB *TARVB_remove_filmes_diretor(TARVB *a, char *diretor, int t) {
     TFILME *busca = TARVB_busca_filme_diretor(a, diretor);
     while(busca != NULL) {
-        a = TARVB_remove_filme(a, busca->titulo, busca->ano, t);
+        a = TARVB_remove_filme_aux(a, busca, t);
         busca = TARVB_busca_filme_diretor(a, diretor);
     }
     return a;
@@ -532,7 +532,7 @@ TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t) {
     if(a == NULL) return a;
     TFILME *filme = TARVB_busca_filme_franquia(a, franquia);
     while(filme != NULL) {
-        a = TARVB_remove_filme(a, filme->titulo, filme->ano, t);
+        a = TARVB_remove_filme_aux(a, filme, t);
         filme = TARVB_busca_filme_franquia(a, franquia);
     }
     return a;
