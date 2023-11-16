@@ -74,3 +74,6 @@ void TARVB_imprime_vis(TARVB *a, int nivel);
 
 /*Imprime a árvore de forma hierárquica*/
 void TARVB_imprime_rec(TARVB *a, int nivel);
+
+/*Cria a árvore a partir do arquivo*/
+TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo);

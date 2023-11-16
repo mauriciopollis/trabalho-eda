@@ -553,3 +553,22 @@ TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia) {
     }
     return TARVB_busca_filme_franquia(a->filho[a->nch], franquia);
 }
+
+TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo) {
+    TARVB *a = TARVB_cria(t);
+
+    // lê o arquivo e vai preenchendo a árvore
+    FILE *f = fopen(nome_arquivo, "r");
+    char titulo[82], diretor[52], genero[32];
+    int ano, duracao;
+    while(!feof(f)) {
+        int r = fscanf(f, "%82[^/]/%d/%52[^/]/%32[^/]/%d\n", titulo, &ano, diretor, genero, &duracao);
+        if(r == 5) { // leu os 5 campos
+            a = TARVB_insere_filme(a, titulo, ano, diretor, genero, duracao, t);            
+        }
+        //printf("Nome: %s, Ano: %d, Diretor: %s, Gênero: %s, Duração(min): %d\n", titulo, ano, diretor, genero, duracao);
+    }
+    
+    fclose(f);
+    return a;
+}
