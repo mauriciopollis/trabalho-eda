@@ -572,3 +572,45 @@ TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo) {
     fclose(f);
     return a;
 }
+
+void *TARVB_lista_filmes_diretor(TARVB *a, char *diretor) {
+    if(a == NULL) return NULL;
+
+    if(a->folha) {
+        for(int i=0; i<a->nch; i++) {
+            if(strcmp(a->chave[i]->diretor, diretor) == 0) printf("%s(%d) - %s, %s, %d min.\n", a->chave[i]->titulo, a->chave[i]->ano, a->chave[i]->diretor, a->chave[i]->genero, a->chave[i]->duracao);
+        }
+        return;
+    }
+    for(int i=0; i<a->nch; i++) {
+        TARVB_lista_filmes_diretor(a->filho[i], diretor);
+        if(strcmp(a->chave[i]->diretor, diretor) == 0) printf("%s(%d) - %s, %s, %d min.\n", a->chave[i]->titulo, a->chave[i]->ano, a->chave[i]->diretor, a->chave[i]->genero, a->chave[i]->duracao);
+    }
+    TARVB_lista_filmes_diretor(a->filho[a->nch], diretor);
+}
+
+TARVB *TARVB_remove_filmes_genero(TARVB *a, char *genero, int t) {
+    TFILME *busca = TARVB_busca_filme_genero(a, genero);
+    while(busca != NULL) {
+        a = TARVB_remove_filme_aux(a, busca, t);
+        busca = TARVB_busca_filme_genero(a, genero);
+    }
+    return a;
+}
+
+TFILME *TARVB_busca_filme_genero(TARVB *a, char *genero) {
+    if(a == NULL) return NULL;
+
+    if(a->folha) {
+        for(int i=0; i<a->nch; i++) {
+            if(strcmp(a->chave[i]->genero, genero) == 0) return a->chave[i];
+        }
+        return NULL;
+    }
+    for(int i=0; i<a->nch; i++) {
+        TFILME *filme = TARVB_busca_filme_genero(a->filho[i], genero);
+        if(filme != NULL) return filme;
+        if(strcmp(a->chave[i]->genero, genero) == 0) return a->chave[i];
+    }
+    return TARVB_busca_filme_genero(a->filho[a->nch], genero);
+}

@@ -11,6 +11,7 @@ int main(void) {
     TARVB *a = TARVB_cria_arvoreb_arquivo(t, arquivo);
     int op, continua = 1;
     while(continua) {
+        printf("=Menu=============================================\n");
         printf("Inserir filme[0]\n");
         printf("Remover filme[1]\n");
         printf("Buscar informações secundárias[2]\n");
@@ -71,10 +72,11 @@ int main(void) {
                 TARVB_modifica_secundarias(a, titulo, ano, novo_diretor, novo_genero, nova_duracao); // melhorar essa função
                 break;
             case 4:
+                printf("==================================================\n");
                 printf("Escolha: Buscar filmes de um diretor\n");
                 printf("Diretor: ");
                 scanf(" %[^\n]", diretor);
-                // falta essa função
+                TARVB_lista_filmes_diretor(a, diretor);
                 break;
             case 5:
                 printf("Escolha: Retirar filmes de um diretor\n");
@@ -86,7 +88,7 @@ int main(void) {
                 printf("Escolha: Retirar filmes de um gênero\n");
                 printf("Gênero: ");
                 scanf(" %[^\n]", genero);
-                // falta essa função
+                TARVB_remove_filmes_genero(a, genero, t);
                 break;
             case 7:
                 printf("Escolha: Retirar filmes de uma franquia\n");

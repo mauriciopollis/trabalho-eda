@@ -32,7 +32,7 @@ int TFILME_compara_titulo_ano(char *titulo1, int ano1, char *titulo2, int ano2) 
         if(ano1 == ano2) {
             return 0;
         }
-        return 1;
+        // return 1;
     }
     return 1;
 }
