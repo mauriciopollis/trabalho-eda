@@ -10,19 +10,21 @@ int main(void) {
 
     TARVB *a = TARVB_cria_arvoreb_arquivo(t, arquivo);
     int op, continua = 1;
+    Limpa_tela();
     while(continua) {
         printf("=Menu=============================================\n");
-        printf("Inserir filme[0]\n");
-        printf("Remover filme[1]\n");
-        printf("Buscar informações secundárias[2]\n");
-        printf("Alterar informações secundárias[3]\n");
-        printf("Buscar filmes de um diretor[4]\n");
-        printf("Retirar filmes de um diretor[5]\n");
-        printf("Retirar filmes de um gênero[6]\n");
-        printf("Retirar filmes de uma franquia[7]\n");
-        printf("Sair[qualquer outro]\n");
-        printf("Escolha: ");
+        printf("[0] - Inserir filme\n");
+        printf("[1] - Remover filme\n");
+        printf("[2] - Buscar informações secundárias\n");
+        printf("[3] - Alterar informações secundárias\n");
+        printf("[4] - Buscar filmes de um diretor\n");
+        printf("[5] - Retirar filmes de um diretor\n");
+        printf("[6] - Retirar filmes de um gênero\n");
+        printf("[7] - Retirar filmes de uma franquia\n");
+        printf("[-1] - Sair\n");
+        printf("\nEscolha: ");
         scanf("%d", &op);
+        Limpa_tela();
 
         char titulo[82], diretor[52], genero[32], novo_diretor[52], novo_genero[32], franquia[82];
         int ano, duracao, nova_duracao;
@@ -55,7 +57,9 @@ int main(void) {
                 scanf(" %[^\n]", titulo);
                 printf("Ano: ");
                 scanf("%d", &ano);
+                printf("\n");
                 TARVB_busca_info_subordinada(a, titulo, ano);
+                printf("\n");
                 break;
             case 3:
                 printf("Escolha: Alterar informações secundárias\n");
@@ -76,7 +80,9 @@ int main(void) {
                 printf("Escolha: Buscar filmes de um diretor\n");
                 printf("Diretor: ");
                 scanf(" %[^\n]", diretor);
+                printf("\n");
                 TARVB_lista_filmes_diretor(a, diretor);
+                printf("\n");
                 break;
             case 5:
                 printf("Escolha: Retirar filmes de um diretor\n");

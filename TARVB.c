@@ -584,8 +584,8 @@ TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo) {
     return a;
 }
 
-void *TARVB_lista_filmes_diretor(TARVB *a, char *diretor) {
-    if(a == NULL) return NULL;
+void TARVB_lista_filmes_diretor(TARVB *a, char *diretor) {
+    if(a == NULL) return;
 
     if(a->folha) {
         for(int i=0; i<a->nch; i++) {
@@ -614,14 +614,22 @@ TFILME *TARVB_busca_filme_genero(TARVB *a, char *genero) {
 
     if(a->folha) {
         for(int i=0; i<a->nch; i++) {
-            if(strcmp(a->chave[i]->genero, genero) == 0) return a->chave[i];
+            if(strstr(a->chave[i]->genero, genero) == 0) return a->chave[i];
         }
         return NULL;
     }
     for(int i=0; i<a->nch; i++) {
         TFILME *filme = TARVB_busca_filme_genero(a->filho[i], genero);
         if(filme != NULL) return filme;
-        if(strcmp(a->chave[i]->genero, genero) == 0) return a->chave[i];
+        if(strstr(a->chave[i]->genero, genero) == 0) return a->chave[i];
     }
     return TARVB_busca_filme_genero(a->filho[a->nch], genero);
+}
+
+void Limpa_tela(void){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }

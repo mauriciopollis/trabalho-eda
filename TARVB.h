@@ -79,10 +79,13 @@ void TARVB_imprime_rec(TARVB *a, int nivel);
 TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo);
 
 /*Lista todos os filmes creditados a um diretor*/
-void *TARVB_lista_filmes_diretor(TARVB *a, char *diretor);
+void TARVB_lista_filmes_diretor(TARVB *a, char *diretor);
 
 /*Busca se existe um filme de um genero na árvore*/
 TFILME *TARVB_busca_filme_genero(TARVB *a, char *genero);
 
 /*Remove todos os filmes de um genero*/
 TARVB *TARVB_remove_filmes_genero(TARVB *a, char *genero, int t);
+
+/*Limpa tela*/
+void Limpa_tela(void);
