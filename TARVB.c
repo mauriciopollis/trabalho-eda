@@ -528,6 +528,17 @@ TARVB *TARVB_remove_filme_aux(TARVB *a, TFILME *filme, int t) {
     return a;
 }
 
+int Checa_franquia(char *filme, char *franquia){
+    int tamanho = strlen(franquia);
+
+    if (strncmp(franquia, filme, tamanho) == 0){
+        return 1;
+    } 
+    else{
+        return 0;
+    }
+}
+
 TARVB *TARVB_remove_filmes_franquia(TARVB *a, char *franquia, int t) {
     if(a == NULL) return a;
     TFILME *filme = TARVB_busca_filme_franquia(a, franquia);
@@ -542,14 +553,14 @@ TFILME *TARVB_busca_filme_franquia(TARVB *a, char *franquia) {
     if(a == NULL) return NULL;
     if(a->folha) {
         for(int i=0; i<a->nch; i++) {
-            if(strstr(a->chave[i]->titulo, franquia) != NULL) return a->chave[i];
+            if(Checa_franquia(a->chave[i]->titulo, franquia)) return a->chave[i];
         }
         return NULL;
     }
     for(int i=0; i<a->nch; i++) {
         TFILME *filme = TARVB_busca_filme_franquia(a->filho[i], franquia);
         if(filme != NULL) return filme;
-        if(strstr(a->chave[i]->titulo, franquia) != NULL) return a->chave[i];
+        if(Checa_franquia(a->chave[i]->titulo, franquia)) return a->chave[i];
     }
     return TARVB_busca_filme_franquia(a->filho[a->nch], franquia);
 }
@@ -562,7 +573,7 @@ TARVB *TARVB_cria_arvoreb_arquivo(int t, char *nome_arquivo) {
     char titulo[82], diretor[52], genero[32];
     int ano, duracao;
     while(!feof(f)) {
-        int r = fscanf(f, "%82[^/]/%d/%52[^/]/%32[^/]/%d\n", titulo, &ano, diretor, genero, &duracao);
+        int r = fscanf(f, "%81[^/]/%d/%51[^/]/%31[^/]/%d\n", titulo, &ano, diretor, genero, &duracao);
         if(r == 5) { // leu os 5 campos
             a = TARVB_insere_filme(a, titulo, ano, diretor, genero, duracao, t);            
         }
