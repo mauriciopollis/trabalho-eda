@@ -97,7 +97,7 @@ int main(void) {
                 printf("Escolha: Retirar filmes de um gênero\n");
                 printf("Gênero: ");
                 scanf(" %[^\n]", genero);
-                TARVB_remove_filmes_genero(a, genero, t);
+                a = TARVB_remove_filmes_genero(a, genero, t);
                 break;
             case 7:
                 printf("Escolha: Retirar filmes de uma franquia\n");

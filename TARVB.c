@@ -614,14 +614,14 @@ TFILME *TARVB_busca_filme_genero(TARVB *a, char *genero) {
 
     if(a->folha) {
         for(int i=0; i<a->nch; i++) {
-            if(strstr(a->chave[i]->genero, genero) == 0) return a->chave[i];
+            if(strstr(a->chave[i]->genero, genero)) return a->chave[i];
         }
         return NULL;
     }
     for(int i=0; i<a->nch; i++) {
         TFILME *filme = TARVB_busca_filme_genero(a->filho[i], genero);
         if(filme != NULL) return filme;
-        if(strstr(a->chave[i]->genero, genero) == 0) return a->chave[i];
+        if(strstr(a->chave[i]->genero, genero)) return a->chave[i];
     }
     return TARVB_busca_filme_genero(a->filho[a->nch], genero);
 }
