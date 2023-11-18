@@ -23,7 +23,6 @@ int main(void) {
         printf("[7] - Retirar filmes de uma franquia\n");
         printf("[8] - Ver quantos filmes estão na árvore\n");
         printf("[9] - Ver quantos nós existem na árvore\n");
-        printf("[10] - Liberar a árvore\n");
         printf("[-1] - Sair\n");
         printf("\nEscolha: ");
         scanf("%d", &op);
@@ -112,10 +111,6 @@ int main(void) {
             case 9:
                 printf("Escolha: Ver quantos nós existem na árvore\n");
                 printf("Existem %d nós na árvore\n", TARVB_conta_nos(a));
-                break;
-            case 10:
-                printf("Escolha: Liberar a árvore\n");
-                TARVB_libera(a);
                 break;
             default:
                 continua = 0;
