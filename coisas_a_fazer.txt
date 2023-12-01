@@ -1,2 +1,0 @@
-- modificar a função main para que ela receba o nome do arquivo e o grau da árvore como argumentos
-- modificar os #include para que o programa seja compilado e rode pela linha de comando (última modificação antes da entrega)

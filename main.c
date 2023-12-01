@@ -3,26 +3,25 @@
 #include<stdlib.h>
 #include "TARVB.c"
 
-int main(void) {
+int main(int argc, char* argv[]) {
 
-    int t = 2;
-    char *arquivo = "filmes.txt";
-
-    TARVB *a = TARVB_cria_arvoreb_arquivo(t, arquivo);
+    int t = atoi(argv[1]);
+ 
+    TARVB *a = TARVB_cria_arvoreb_arquivo(t, argv[2]);
     int op, continua = 1;
     Limpa_tela();
     while(continua) {
         printf("=Menu=============================================\n");
         printf("[0] - Inserir filme\n");
         printf("[1] - Remover filme\n");
-        printf("[2] - Buscar informações secundárias\n");
-        printf("[3] - Alterar informações secundárias\n");
-        printf("[4] - Buscar filmes de um diretor\n");
-        printf("[5] - Retirar filmes de um diretor\n");
-        printf("[6] - Retirar filmes de um gênero\n");
-        printf("[7] - Retirar filmes de uma franquia\n");
-        printf("[8] - Ver quantos filmes estão na árvore\n");
-        printf("[9] - Ver quantos nós existem na árvore\n");
+        printf("[2] - Buscar informações subordinadas\n");
+        printf("[3] - Alterar informações subordinadas\n");
+        printf("[4] - Buscar todos os filmes de um diretor\n");
+        printf("[5] - Retirar todos os filmes de um diretor\n");
+        printf("[6] - Retirar todos os filmes de um gênero\n");
+        printf("[7] - Retirar todos os filmes de uma franquia\n");
+        //printf("[8] - Ver quantos filmes estão na árvore\n");
+        //printf("[9] - Ver quantos nós existem na árvore\n");
         printf("[-1] - Sair\n");
         printf("\nEscolha: ");
         scanf("%d", &op);
@@ -75,7 +74,7 @@ int main(void) {
                 scanf(" %[^\n]", novo_genero);
                 printf("Nova duração: ");
                 scanf("%d", &nova_duracao);
-                TARVB_modifica_secundarias(a, titulo, ano, novo_diretor, novo_genero, nova_duracao); // melhorar essa função
+                TARVB_modifica_secundarias(a, titulo, ano, novo_diretor, novo_genero, nova_duracao);
                 break;
             case 4:
                 printf("==================================================\n");
@@ -102,16 +101,16 @@ int main(void) {
                 printf("Escolha: Retirar filmes de uma franquia\n");
                 printf("Franquia: ");
                 scanf(" %[^\n]", franquia);
-                a = TARVB_remove_filmes_franquia(a, franquia, t); // melhorar essa função
+                a = TARVB_remove_filmes_franquia(a, franquia, t);
                 break;
-            case 8:
-                printf("Escolha: Ver quantos filmes estão na árvore\n");
-                printf("Existem %d filmes na árvore\n", TARVB_conta_filmes(a));
-                break;
-            case 9:
-                printf("Escolha: Ver quantos nós existem na árvore\n");
-                printf("Existem %d nós na árvore\n", TARVB_conta_nos(a));
-                break;
+            //case 8:
+            //    printf("Escolha: Ver quantos filmes estão na árvore\n");
+            //    printf("Existem %d filmes na árvore\n", TARVB_conta_filmes(a));
+            //    break;
+            //case 9:
+            //    printf("Escolha: Ver quantos nós existem na árvore\n");
+            //    printf("Existem %d nós na árvore\n", TARVB_conta_nos(a));
+            //    break;
             default:
                 continua = 0;
                 printf("Escolha: Sair\n");
