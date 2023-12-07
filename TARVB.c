@@ -531,7 +531,7 @@ TARVB *TARVB_remove_filme_aux(TARVB *a, TFILME *filme, int t) {
 int Checa_franquia(char *filme, char *franquia){
     int tamanho = strlen(franquia);
 
-    if (strncmp(franquia, filme, tamanho) == 0){
+    if (strncmp(franquia, filme, tamanho) == 0){  //Compara apenas os primeiros n caracteres.
         return 1;
     } 
     else{
@@ -614,14 +614,14 @@ TFILME *TARVB_busca_filme_genero(TARVB *a, char *genero) {
 
     if(a->folha) {
         for(int i=0; i<a->nch; i++) {
-            if(strstr(a->chave[i]->genero, genero)) return a->chave[i];
+            if (isWordPresent(a->chave[i]->genero, genero)) return a->chave[i];
         }
         return NULL;
     }
     for(int i=0; i<a->nch; i++) {
         TFILME *filme = TARVB_busca_filme_genero(a->filho[i], genero);
         if(filme != NULL) return filme;
-        if(strstr(a->chave[i]->genero, genero)) return a->chave[i];
+        if (isWordPresent(a->chave[i]->genero, genero)) return a->chave[i];
     }
     return TARVB_busca_filme_genero(a->filho[a->nch], genero);
 }
@@ -633,3 +633,31 @@ void Limpa_tela(void){
         system("clear");
     #endif
 }
+
+int isWordPresent(char* str, const char* word) {
+    // Quebra palavras com "|" como separador
+    char* token = strtok(str, "|");
+
+    // loop por "tokens"
+    while (token != NULL) {
+        // isspace verifica pelo espaço após o "|". 
+        while (isspace(*token)){
+            ++token; // Avança um caractere
+        }
+
+        // Compara tokens com a palavra(genero)
+        // printf("[%s] vs [%s]: %d\n", token, word, strcasecmp(token, word));
+        if (strcasecmp(token, word) == 0) {
+            // verdadeiro
+            return 1;
+        }
+
+        // vai para o próximo token
+        token = strtok(NULL, "|");
+    }
+
+    // falso
+    return 0;
+}
+
+

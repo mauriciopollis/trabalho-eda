@@ -89,3 +89,6 @@ TARVB *TARVB_remove_filmes_genero(TARVB *a, char *genero, int t);
 
 /*Limpa tela*/
 void Limpa_tela(void);
+
+/*Auxiliar para verificação de genero*/
+int isWordPresent(char* str, const char* word);
